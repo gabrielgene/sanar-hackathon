@@ -103,7 +103,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
         </div>
         <p className={classes.text}>
           Entrando com sua conta do Google você fará parte da comunidade{' '}
-          <strong>BloodBank</strong>, tendo acesso a um clube exclusivos de
+          <strong>Vidare</strong>, tendo acesso a um clube exclusivos de
           vantagens, descontos e oportunidades únicas.
         </p>
         <div className={classes.carWrapper}>
