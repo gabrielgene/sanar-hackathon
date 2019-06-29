@@ -75,18 +75,22 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     response: GoogleLoginResponse | GoogleLoginResponseOffline | any,
   ) => {
     const { profileObj } = response;
-    await (await fetch('/', {
+    const data = await (await fetch('/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(profileObj),
     })).json();
+    console.log(data, profileObj);
     localStorage.setItem('googleId', profileObj.googleId);
     setQueue(true);
   };
 
-  function onFailureGoogle(response: GoogleLoginResponse) {}
+  function onFailureGoogle(response: GoogleLoginResponse) {
+    console.log(response);
+  }
+
   return (
     <div>
       <img
@@ -114,7 +118,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
           />
         </div>
         <GoogleLogin
-          clientId="1067529242631-uirucur7n733nsdcois25ntf14nmlcd5.apps.googleusercontent.com"
+          clientId="1067529242631-akp71a0lp6617a34042jiso66nnhvudk.apps.googleusercontent.com"
           buttonText="Entrar com o Google"
           onSuccess={onSuccessGoogle}
           onFailure={onFailureGoogle}
