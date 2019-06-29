@@ -66,7 +66,6 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
   React.useEffect(() => {
     const googleId = localStorage.getItem('googleId');
-    console.log({ googleId });
     if (googleId) {
       setQueue(true);
     }
