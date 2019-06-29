@@ -114,7 +114,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
           />
         </div>
         <GoogleLogin
-          clientId="894237077503-magbtuaef618ur9ft2v3avefj8cg0e49.apps.googleusercontent.com"
+          clientId="1067529242631-uirucur7n733nsdcois25ntf14nmlcd5.apps.googleusercontent.com"
           buttonText="Entrar com o Google"
           onSuccess={onSuccessGoogle}
           onFailure={onFailureGoogle}
