@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     car: {
       width: theme.spacing(22.5),
+      height: theme.spacing(15),
     },
     carWrapper: {
       display: 'flex',

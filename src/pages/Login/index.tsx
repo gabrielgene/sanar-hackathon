@@ -70,8 +70,9 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
           <Heart className={classes.icon} />
         </div>
         <p className={classes.text}>
-          Além de salvar vidas, você agora pode participar de nosso clube
-          exclusivo de descontos e vantagens para doadores.
+          Além de salvar vidas doando sangue, plaquetas, medula óssea, plasma e
+          leite materno, você agora pode participar de nosso clube exclusivo de
+          descontos e vantagens para doadores.
         </p>
         <div className={classes.iconWrapper}>
           <Charity className={classes.icon} />
