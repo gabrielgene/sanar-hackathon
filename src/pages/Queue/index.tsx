@@ -75,7 +75,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     response: GoogleLoginResponse | GoogleLoginResponseOffline | any,
   ) => {
     const { profileObj } = response;
-    const data = await (await fetch('/', {
+    const data = await (await fetch('https://sangue-land.dygufa.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

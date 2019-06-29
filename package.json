@@ -37,7 +37,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://sangue-land.dygufa.com",
   "devDependencies": {
     "@types/react-router-dom": "^4.3.4"
   }
