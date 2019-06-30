@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 'unset',
       bottom: 0,
       color: 'white',
+      background: "rgba(0, 0, 0, 0.8)"
     },
     spinner: {
       marginTop: theme.spacing(20),
