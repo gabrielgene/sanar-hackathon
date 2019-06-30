@@ -3,12 +3,12 @@ import AppBar from '@material-ui/core/AppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { RouteComponentProps } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBack';
 import Webcam from "react-webcam";
 import { Button } from '@material-ui/core';
 import { postBloodDonation } from '../../fetches';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
+const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
   const classes = useStyles();
   const webcam = useRef(null);
   const [picture, setPicture] = useState(null);
@@ -70,15 +70,16 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <div>
-        <p>
-          Obrigado por colaborar com a manutenção da vida de dezenas de pessoas! Ao enviar seu comprovante você ganha 50 pontos!
-        </p>
-      </div>
 
       {({
         "webcam": (
           <>
+            <div>
+              <p>
+                Obrigado por colaborar com a manutenção da vida de dezenas de pessoas! Ao enviar seu comprovante você ganha 50 pontos!
+              </p>
+            </div>
+
             <Webcam
               ref={webcam}
               style={{
@@ -105,7 +106,7 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
         "success": (
           <div>
             <p>Comprovante enviado!</p>
-            <Button onClick={takePicture} color="primary" fullWidth>
+            <Button onClick={() => history.push("/catalogo")} variant="contained" color="primary" fullWidth>
               Ver onde posso usar meus pontos!
             </Button>
           </div>
@@ -115,4 +116,4 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
   );
 };
 
-export default Item;
+export default withRouter(BloodDonation);

@@ -55,9 +55,6 @@ const Profile: React.FC<RouteComponentProps> = ({ history }) => {
 
   const [vouchers, setVouchers] = React.useState([]);
 
-  // product: Product
-  // expiresAt: Date
-  // code: string
   React.useEffect(() => {
     getMe().then((r: any) => setData(r.data));
     getVouchers().then((r: any) => setVouchers(r.data));
