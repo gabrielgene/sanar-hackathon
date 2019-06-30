@@ -15,8 +15,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { getMe, getVouchers } from '../../../fetches';
-import { Button } from '@material-ui/core';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -120,33 +118,40 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
           </Typography>
           <Divider variant="middle" />
           <div className={classes.chipWrapper}>
-            <Chip className={classes.chip} label={`Pontos: ${points}`} />
             <Chip
               className={classes.chip}
+              color="secondary"
+              label={`Pontos: ${points}`}
+            />
+            <Chip
+              className={classes.chip}
+              color="secondary"
               label={`Nivel de doador: ${level}`}
             />
           </div>
         </Card>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            Parabens pelo voucher
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {vouchers[0].product.name} - Código: {vouchers[0].code}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary" autoFocus>
-              Ok
-            </Button>
-          </DialogActions>
-        </Dialog>
+        {open && (
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              Parabens pelo voucher
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {vouchers[0].product.name} - Código: {vouchers[0].code}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary" autoFocus>
+                Ok
+              </Button>
+            </DialogActions>
+          </Dialog>
+        )}
 
         <Button
           onClick={() => history.push('/comprovante')}

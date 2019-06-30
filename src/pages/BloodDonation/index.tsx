@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBack';
-import Webcam from "react-webcam";
+import Webcam from 'react-webcam';
 import { Button } from '@material-ui/core';
 import { postBloodDonation } from '../../fetches';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
     wrapper: {
       marginTop: theme.spacing(4),
       padding: theme.spacing(2),
+    },
+    contentWrapper: {
+      marginTop: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
@@ -29,7 +32,7 @@ const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
   const classes = useStyles();
   const webcam = useRef(null);
   const [picture, setPicture] = useState(null);
-  const [pageState, setPageState] = useState("webcam");
+  const [pageState, setPageState] = useState('webcam');
   const [sendingPicture, setSendingPicture] = useState(false);
 
   React.useEffect(() => {
@@ -39,18 +42,18 @@ const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
   const takePicture = () => {
     const imageSrc = (webcam as any).current.getScreenshot();
     setPicture(imageSrc);
-    setPageState("picture");
+    setPageState('picture');
     console.log(imageSrc);
-  }
+  };
 
   const sendPicture = async () => {
     setSendingPicture(true);
     await postBloodDonation({
-      image: picture
+      image: picture,
     });
     setSendingPicture(false);
-    setPageState("success");
-  }
+    setPageState('success');
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -71,47 +74,76 @@ const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
         </Toolbar>
       </AppBar>
 
-      {({
-        "webcam": (
-          <>
-            <div>
-              <p>
-                Obrigado por colaborar com a manutenção da vida de dezenas de pessoas! Ao enviar seu comprovante você ganha 50 pontos!
-              </p>
-            </div>
+      <div className={classes.contentWrapper}>
+        {
+          ({
+            webcam: (
+              <>
+                <div>
+                  <Typography variant="body1" gutterBottom>
+                    Comprovante Obrigado por colaborar com a manutenção da vida
+                    de dezenas de pessoas! Ao enviar seu comprovante você ganha
+                    50 pontos!
+                  </Typography>
+                </div>
 
-            <Webcam
-              ref={webcam}
-              style={{
-                height: "100%",
-                width: "100%",
-                objectFit: "cover",
-                objectPosition: "center"
-              }}
-            />
+                <Webcam
+                  ref={webcam}
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
 
-            <Button onClick={takePicture} variant="contained" color="primary" fullWidth>
-              Tirar foto
-          </Button>
-          </>
-        ),
-        "picture": (
-          <>
-            <img src={picture!} />
-            <Button onClick={sendPicture} disabled={sendingPicture} variant="contained" color="primary" fullWidth>
-              {sendingPicture ? "Enviando..." : "Enviar foto"}
-            </Button>
-          </>
-        ),
-        "success": (
-          <div>
-            <p>Comprovante enviado!</p>
-            <Button onClick={() => history.push("/catalogo")} variant="contained" color="primary" fullWidth>
-              Ver onde posso usar meus pontos!
-            </Button>
-          </div>
-        )
-      } as { [key: string]: JSX.Element })[pageState]}
+                <Button
+                  onClick={takePicture}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Tirar foto
+                </Button>
+              </>
+            ),
+            picture: (
+              <>
+                <Typography variant="body1" gutterBottom>
+                  Comprovante Obrigado por colaborar com a manutenção da vida de
+                  dezenas de pessoas! Ao enviar seu comprovante você ganha 50
+                  pontos!
+                </Typography>
+                <img src={picture!} />
+                <Button
+                  onClick={sendPicture}
+                  disabled={sendingPicture}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  {sendingPicture ? 'Enviando...' : 'Enviar foto'}
+                </Button>
+              </>
+            ),
+            success: (
+              <div>
+                <Typography variant="body1" gutterBottom>
+                  Comprovante enviado!
+                </Typography>
+                <Button
+                  onClick={() => history.push('/catalogo')}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Ver onde posso usar meus pontos!
+                </Button>
+              </div>
+            ),
+          } as { [key: string]: JSX.Element })[pageState]
+        }
+      </div>
     </div>
   );
 };
