@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { getProducts } from '../../../fetches';
 
 interface Product {
@@ -39,24 +40,40 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: 0,
       color: 'white',
     },
+    spinner: {
+      marginTop: theme.spacing(20),
+      display: 'flex',
+      justifyContent: 'center',
+    },
   }),
 );
 const Start: React.FC<RouteComponentProps> = ({ history }) => {
   const classes = useStyles();
   const [values, setValues] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    getProducts().then(p => p.data && setValues(p.data));
+    getProducts().then(p => {
+      p.data && setValues(p.data);
+      setLoading(false);
+    });
   }, []);
 
-  console.log(values);
+  if (loading) {
+    return (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div className={classes.root}>
       {values.map((i: Product) => (
         <Card
           className={classes.card}
           key={i._id}
-          onClick={() => history.push(`item/${i._id}`)}
+          onClick={() => history.push(`item/${i._id}`, { product: i })}
         >
           <CardMedia
             className={classes.media}
