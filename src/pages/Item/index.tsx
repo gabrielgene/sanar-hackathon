@@ -84,7 +84,10 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
   }
 
   function handleSubmit() {
-    postVoucher({ productId: _id }).then(r => history.push('/perfil'));
+    postVoucher({ productId: _id }).then(r => {
+      console.log(r);
+      history.push('/perfil', { open: true });
+    });
   }
 
   return (
