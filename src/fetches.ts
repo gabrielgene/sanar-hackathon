@@ -93,12 +93,43 @@ export const getVouchers = () => {
 };
 
 export const postVoucher = (request: any) => {
+  const token = localStorage.getItem('token');
   return fetch(`${HOST}/vouchers`, {
     credentials: 'same-origin',
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: token || 'Bli',
+    },
+    body: JSON.stringify(request),
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler({}));
+};
+
+export const postRedeem = (request: any) => {
+  return fetch(`${HOST}/redeem`, {
+    credentials: 'same-origin',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(request),
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler({}));
+};
+
+export const postBloodDonation = (request: any) => {
+  const token = localStorage.getItem('token');
+  return fetch(`${HOST}/bloodDonations`, {
+    credentials: 'same-origin',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token!,
     },
     body: JSON.stringify(request),
   })
