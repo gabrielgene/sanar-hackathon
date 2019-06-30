@@ -7,7 +7,7 @@ import Queue from './pages/Queue';
 import Join from './pages/Join';
 import Home from './pages/Home';
 import Item from './pages/Item';
-import ConsumeVoucher from "./pages/ConsumeVoucher";
+import ConsumeVoucher from './pages/ConsumeVoucher';
 import BloodDonation from './pages/BloodDonation';
 import * as serviceWorker from './serviceWorker';
 import defaultTheme from './theme';
@@ -17,9 +17,9 @@ const App = () => (
   <MuiThemeProvider theme={defaultTheme}>
     <Router>
       <React.Fragment>
-        <Route exact path="/" component={Login} />
-        <Route path="/participar" component={Queue} />
-        <Route path="/entrar" component={Join} />
+        <Route exact path="/" component={Join} />
+        {/* <Route path="/participar" component={Queue} /> */}
+        {/* <Route path="/entrar" component={Join} /> */}
         <Route path="/catalogo" component={Home} />
         <Route path="/item/:id" component={Item} />
         <Route path="/perfil" component={Home} />
