@@ -174,7 +174,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
                 />
               }
               title={`${v.product.name} - Código: ${v.code}`}
-              subheader={v.expiresAt}
+              subheader={`Expira em: ${new Intl.DateTimeFormat('pt').format(new Date(v.expiresAt))}`}
             />
           </Card>
         ))}
