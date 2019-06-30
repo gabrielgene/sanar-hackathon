@@ -56,7 +56,7 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
         </Toolbar>
       </AppBar>
       <div className={classes.wrapper}>
-        {value === '/vouchers' && <Start />}
+        {value === '/catalogo' && <Start />}
         {value === '/perfil' && <Profile />}
         {value === '/aprenda' && <Learn />}
       </div>
@@ -70,8 +70,8 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
         className={classes.navigation}
       >
         <BottomNavigationAction
-          value="/vouchers"
-          label="Vouchers"
+          value="/catalogo"
+          label="Catálogo"
           icon={<LocalIcon />}
         />
         <BottomNavigationAction
@@ -79,11 +79,11 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
           label="Perfil"
           icon={<ProfileIcon />}
         />
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           value="/aprenda"
           label="Aprenda"
           icon={<SchoolIcon />}
-        />
+        /> */}
       </BottomNavigation>
     </div>
   );

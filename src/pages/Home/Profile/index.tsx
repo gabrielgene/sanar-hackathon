@@ -15,11 +15,17 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { getMe, getVouchers } from '../../../fetches';
+import { Button } from '@material-ui/core';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    avatarWrapper: {
+    wrapper: {
       marginTop: theme.spacing(2),
+      padding: theme.spacing(2),
+    },
+    avatarWrapper: {
+      // marginTop: theme.spacing(2),
       display: 'flex',
       justifyContent: 'center',
     },
@@ -28,10 +34,13 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 60,
       height: 60,
     },
+    button: {
+      marginTop: theme.spacing(2),
+    },
     card: {
-      marginTop: theme.spacing(9),
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
+      // marginTop: theme.spacing(9),
+      // marginLeft: theme.spacing(2),
+      // marginRight: theme.spacing(2),
     },
     cardList: {
       marginTop: theme.spacing(2),
@@ -114,7 +123,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
             <Chip className={classes.chip} label={`Pontos: ${points}`} />
             <Chip
               className={classes.chip}
-              label={`Level de doador: ${level}`}
+              label={`Nivel de doador: ${level}`}
             />
           </div>
         </Card>
@@ -138,6 +147,16 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
             </Button>
           </DialogActions>
         </Dialog>
+
+        <Button
+          onClick={() => history.push('/comprovante')}
+          variant="contained"
+          color="primary"
+          fullWidth
+          className={classes.button}
+        >
+          NOVO COMPROVANTE DE DOAÇÃO
+        </Button>
 
         {vouchers.map((v: any) => (
           <Card key={v._id} className={classes.cardList}>

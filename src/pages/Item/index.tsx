@@ -19,7 +19,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { postVoucher } from '../../fetches';
+import { postVoucher, getMe } from '../../fetches';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,6 +75,17 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const [userData, setUserData] = React.useState({
+    points: 0,
+    imageUrl: '',
+    name: '',
+    level: 0,
+  });
+
+  React.useEffect(() => {
+    getMe().then((r: any) => setUserData(r.data));
+  }, []);
+
   function handleClickOpen() {
     setOpen(true);
   }
@@ -128,7 +139,7 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
                 <DomainIcon />
               </Avatar>
             }
-            title={`Instituição: ${company.name}`}
+            title={`Parceiro: ${company.name}`}
           />
         </Card>
         <Card className={classes.card}>
@@ -138,7 +149,7 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
                 <ScoreIcon />
               </Avatar>
             }
-            title={`Essa oferta vale ${points} pontos`}
+            title={`Essa oferta custa ${points} pontos`}
           />
         </Card>
         <Card className={classes.card}>
@@ -158,7 +169,7 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
                 <MoneyIcon />
               </Avatar>
             }
-            title={`R$ ${price}`}
+            title={`R$ ${(price / 100).toFixed(2)}`}
           />
         </Card>
         <Button
@@ -178,18 +189,20 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Deseja realmente gerar esse voucher?
+          Deseja gerar esse voucher?
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Você possui o 1000 pontos, essa ação irá consumir 10 pontos.
+            {userData.points < points ? `No momento você não tem pontos suficientes. Doe sangue e ganhe mais 50 pontos, além de ajudar a salvar vidas.` :
+              `Você possui ${userData.points} pontos, essa ação irá consumir ${points} pontos.`
+            }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleSubmit} color="primary" autoFocus>
+          <Button onClick={handleSubmit} color="primary" disabled={userData.points < points} autoFocus>
             Gerar Voucher
           </Button>
         </DialogActions>

@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 'unset',
       bottom: 0,
       color: 'white',
+      background: "rgba(0, 0, 0, 0.8)"
     },
     spinner: {
       marginTop: theme.spacing(20),
@@ -69,7 +70,6 @@ const Start: React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <>
-      <div>Colocar nome da pessoa, numero de pontos dela e nivel</div>
       <div className={classes.root}>
         {values.map((i: Product) => (
           <Card
