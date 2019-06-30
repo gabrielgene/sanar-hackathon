@@ -63,7 +63,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     const { profileObj } = response;
     const { data } = await postAuth(profileObj);
     localStorage.setItem('token', data.token);
-    history.push('/catalogo');
+    history.push('/perfil');
   };
 
   function onFailureGoogle(response: GoogleLoginResponse) {
