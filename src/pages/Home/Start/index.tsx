@@ -51,24 +51,27 @@ const Start: React.FC<RouteComponentProps> = ({ history }) => {
 
   console.log(values);
   return (
-    <div className={classes.root}>
-      {values.map((i: Product) => (
-        <Card
-          className={classes.card}
-          key={i._id}
-          onClick={() => history.push(`item/${i._id}`)}
-        >
-          <CardMedia
-            className={classes.media}
-            image={i.imageUrl}
-            title="Contemplative Reptile"
-          />
-          <Button color="default" fullWidth className={classes.button}>
-            {i.name} - {i.discount}%
-          </Button>
-        </Card>
-      ))}
-    </div>
+    <>
+      <div>Colocar nome da pessoa, numero de pontos dela e nivel</div>
+      <div className={classes.root}>
+        {values.map((i: Product) => (
+          <Card
+            className={classes.card}
+            key={i._id}
+            onClick={() => history.push(`item/${i._id}`)}
+          >
+            <CardMedia
+              className={classes.media}
+              image={i.imageUrl}
+              title="Contemplative Reptile"
+            />
+            <Button color="default" fullWidth className={classes.button}>
+              {i.name} - {i.discount}%
+            </Button>
+          </Card>
+        ))}
+      </div>
+    </>
   );
 };
 
