@@ -52,6 +52,18 @@ export const getProducts = () => {
     .catch(createErrorHandler([]));
 };
 
+export const getProductsById = (id: string) => {
+  return fetch(`${HOST}/products/${id}`, {
+    credentials: 'same-origin',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler([]));
+};
+
 export const getMe = () => {
   const token = localStorage.getItem('token');
   return fetch(`${HOST}/me`, {
@@ -64,4 +76,32 @@ export const getMe = () => {
   })
     .then(handleHttpStatus)
     .catch(createErrorHandler([]));
+};
+
+export const getVouchers = () => {
+  const token = localStorage.getItem('token');
+  return fetch(`${HOST}/vouchers`, {
+    credentials: 'same-origin',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token || 'Bli',
+    },
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler([]));
+};
+
+export const postVoucher = (request: any) => {
+  return fetch(`${HOST}/vouchers`, {
+    credentials: 'same-origin',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(request),
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler({}));
 };
