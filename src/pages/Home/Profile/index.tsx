@@ -6,11 +6,17 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import { getMe, getVouchers } from '../../../fetches';
+import { Button } from '@material-ui/core';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    avatarWrapper: {
+    wrapper: {
       marginTop: theme.spacing(2),
+      padding: theme.spacing(2),
+    },
+    avatarWrapper: {
+      // marginTop: theme.spacing(2),
       display: 'flex',
       justifyContent: 'center',
     },
@@ -19,10 +25,13 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 60,
       height: 60,
     },
+    button: {
+      marginTop: theme.spacing(2)
+    },
     card: {
-      marginTop: theme.spacing(9),
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
+      // marginTop: theme.spacing(9),
+      // marginLeft: theme.spacing(2),
+      // marginRight: theme.spacing(2),
     },
     chip: {
       marginRight: theme.spacing(1),
@@ -35,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Profile: React.FC = () => {
+const Profile: React.FC<RouteComponentProps> = ({ history }) => {
   const classes = useStyles();
   const [data, setData] = React.useState({
     points: 0,
@@ -58,7 +67,7 @@ const Profile: React.FC = () => {
 
   console.log(vouchers);
   return (
-    <div>
+    <div className={classes.wrapper}>
       <Card className={classes.card}>
         <div className={classes.avatarWrapper}>
           <Avatar
@@ -73,9 +82,20 @@ const Profile: React.FC = () => {
         <Divider variant="middle" />
         <div className={classes.chipWrapper}>
           <Chip className={classes.chip} label={`Pontos: ${points}`} />
-          <Chip className={classes.chip} label={`Level de doador: ${level}`} />
+          <Chip className={classes.chip} label={`Nível de doador: ${level}`} />
         </div>
       </Card>
+
+      <Button
+        onClick={() => history.push("/comprovante")}
+        variant="contained"
+        color="primary"
+        fullWidth
+        className={classes.button}
+
+      >
+        NOVO COMPROVANTE DE DOAÇÃO
+      </Button>
 
       {vouchers.map(({ product, expiresAt, code, _id }) => (
         <Card key={_id}>Voucher</Card>
@@ -84,4 +104,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default withRouter(Profile);

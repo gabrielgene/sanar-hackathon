@@ -155,7 +155,7 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
                 <MoneyIcon />
               </Avatar>
             }
-            title={`R$ ${price}`}
+            title={`R$ ${(price / 100).toFixed(2)}`}
           />
         </Card>
         <Button

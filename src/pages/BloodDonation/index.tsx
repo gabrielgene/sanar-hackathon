@@ -12,6 +12,10 @@ import { postBloodDonation } from '../../fetches';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    wrapper: {
+      marginTop: theme.spacing(4),
+      padding: theme.spacing(2),
+    },
     title: {
       flexGrow: 1,
     },
@@ -49,7 +53,7 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
   }
 
   return (
-    <div>
+    <div className={classes.wrapper}>
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -87,7 +91,8 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
                 objectPosition: "center"
               }}
             />
-            <Button onClick={takePicture} color="primary" fullWidth>
+
+            <Button onClick={takePicture} variant="contained" color="primary" fullWidth>
               Tirar foto
           </Button>
           </>
@@ -95,7 +100,7 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
         "picture": (
           <>
             <img src={picture!} />
-            <Button onClick={sendPicture} disabled={sendingPicture} color="primary" fullWidth>
+            <Button onClick={sendPicture} disabled={sendingPicture} variant="contained" color="primary" fullWidth>
               {sendingPicture ? "Enviando..." : "Enviar foto"}
             </Button>
           </>
