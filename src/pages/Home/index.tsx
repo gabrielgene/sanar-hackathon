@@ -79,11 +79,11 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
           label="Perfil"
           icon={<ProfileIcon />}
         />
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           value="/aprenda"
           label="Aprenda"
           icon={<SchoolIcon />}
-        />
+        /> */}
       </BottomNavigation>
     </div>
   );

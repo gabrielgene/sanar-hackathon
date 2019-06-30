@@ -69,7 +69,6 @@ const Start: React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <>
-      <div>Colocar nome da pessoa, numero de pontos dela e nivel</div>
       <div className={classes.root}>
         {values.map((i: Product) => (
           <Card
