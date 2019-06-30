@@ -76,9 +76,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
     level: 0,
   });
   const [loading, setLoading] = React.useState(true);
-  const [vouchers, setVouchers] = React.useState([
-    { _id: '', product: { imageUrl: '', name: '' }, expiresAt: '', code: '' },
-  ]);
+  const [vouchers, setVouchers] = React.useState([]);
 
   function handleClose() {
     history.replace('/perfil', {});
@@ -87,7 +85,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
 
   const loadData = async () => {
     await getMe().then((r: any) => setData(r.data));
-    await getVouchers().then((r: any) => setVouchers(r.data));
+    await getVouchers().then((r: any) => setVouchers(r.data.reverse()));
     setLoading(false);
   };
   React.useEffect(() => {
@@ -116,6 +114,9 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
           <Typography align="center" variant="h5" gutterBottom>
             {name}
           </Typography>
+          <Typography align="center" variant="body1" gutterBottom>
+            Muito obrigado por fazer parte da nossa rede do bem! Utilize o menu de catálogo para encontras todos os benefícios que preparamos pra você!
+          </Typography>
           <Divider variant="middle" />
           <div className={classes.chipWrapper}>
             <Chip
@@ -130,7 +131,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
             />
           </div>
         </Card>
-        {open && (
+        {vouchers.length > 0 && open && (
           <Dialog
             open={open}
             onClose={handleClose}
@@ -142,7 +143,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                {vouchers[0].product.name} - Código: {vouchers[0].code}
+                {(vouchers as any)[0].product.name} - Código: {(vouchers as any)[0].code}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -160,7 +161,7 @@ const Profile: React.FC<RouteComponentProps> = ({ location, history }) => {
           fullWidth
           className={classes.button}
         >
-          NOVO COMPROVANTE DE DOAÇÃO
+          ADICIONAR COMPROVANTE DE DOAÇÃO
         </Button>
 
         {vouchers.map((v: any) => (
