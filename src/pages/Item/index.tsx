@@ -125,7 +125,7 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
                 <DomainIcon />
               </Avatar>
             }
-            title={`Instituição: ${company.name}`}
+            title={`Parceiro: ${company.name}`}
           />
         </Card>
         <Card className={classes.card}>
@@ -135,7 +135,7 @@ const Item: React.FC<RouteComponentProps<MatchParams>> = ({
                 <ScoreIcon />
               </Avatar>
             }
-            title={`Essa oferta vale ${points} pontos`}
+            title={`Essa oferta custa ${points} pontos`}
           />
         </Card>
         <Card className={classes.card}>

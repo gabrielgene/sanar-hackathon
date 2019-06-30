@@ -72,10 +72,7 @@ const Item: React.FC<RouteComponentProps> = ({ match, history }) => {
       </AppBar>
       <div>
         <p>
-          Obrigado por colaborar com a manutenção da vida de dezenas de pessoas!
-        </p>
-        <p>
-          Envie uma foto do comprovante de doação e ganhe 50 pontos!
+          Obrigado por colaborar com a manutenção da vida de dezenas de pessoas! Ao enviar seu comprovante você ganha 50 pontos!
         </p>
       </div>
 
