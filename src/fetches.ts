@@ -80,3 +80,16 @@ export const postBloodDonation = (request: any) => {
     .then(handleHttpStatus)
     .catch(createErrorHandler({}));
 };
+
+export const postRedeem = (request: any) => {
+  return fetch(`${HOST}/redeem`, {
+    credentials: 'same-origin',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(request),
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler({}));
+};
