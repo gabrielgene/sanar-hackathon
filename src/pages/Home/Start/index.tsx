@@ -75,7 +75,7 @@ const Start: React.FC<RouteComponentProps> = ({ history }) => {
           <Card
             className={classes.card}
             key={i._id}
-            onClick={() => history.push(`item/${i._id}`)}
+            onClick={() => history.push(`item/${i._id}`, { product: i })}
           >
             <CardMedia
               className={classes.media}
