@@ -7,6 +7,7 @@ import Queue from './pages/Queue';
 import Join from './pages/Join';
 import Home from './pages/Home';
 import Item from './pages/Item';
+import BloodDonation from './pages/BloodDonation';
 import * as serviceWorker from './serviceWorker';
 import defaultTheme from './theme';
 import './index.css';
@@ -21,6 +22,7 @@ const App = () => (
         <Route path="/vouchers" component={Home} />
         <Route path="/item/:id" component={Item} />
         <Route path="/perfil" component={Home} />
+        <Route path="/comprovante" component={BloodDonation} />
         <Route path="/aprenda" component={Home} />
       </React.Fragment>
     </Router>

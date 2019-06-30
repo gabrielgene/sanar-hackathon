@@ -65,3 +65,18 @@ export const getMe = () => {
     .then(handleHttpStatus)
     .catch(createErrorHandler([]));
 };
+
+export const postBloodDonation = (request: any) => {
+  const token = localStorage.getItem('token');
+  return fetch(`${HOST}/bloodDonations`, {
+    credentials: 'same-origin',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token!,
+    },
+    body: JSON.stringify(request),
+  })
+    .then(handleHttpStatus)
+    .catch(createErrorHandler({}));
+};
