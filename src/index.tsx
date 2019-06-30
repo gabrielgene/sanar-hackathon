@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Login from './pages/Login';
 import Queue from './pages/Queue';
+import Join from './pages/Join';
+import Home from './pages/Home';
+import Item from './pages/Item';
 import * as serviceWorker from './serviceWorker';
 import defaultTheme from './theme';
 import './index.css';
@@ -14,6 +17,11 @@ const App = () => (
       <React.Fragment>
         <Route exact path="/" component={Login} />
         <Route path="/participar" component={Queue} />
+        <Route path="/entrar" component={Join} />
+        <Route path="/vouchers" component={Home} />
+        <Route path="/item/:id" component={Item} />
+        <Route path="/perfil" component={Home} />
+        <Route path="/aprenda" component={Home} />
       </React.Fragment>
     </Router>
   </MuiThemeProvider>

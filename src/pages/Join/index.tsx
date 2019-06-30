@@ -7,22 +7,15 @@ import {
   GoogleLoginResponseOffline,
 } from 'react-google-login';
 import { RouteComponentProps } from 'react-router-dom';
+import { ReactComponent as Charity } from '../../charity.svg';
 import { ReactComponent as Heart } from '../../heart.svg';
-import { postRegisterUser } from '../../fetches';
+import { postAuth } from '../../fetches';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     img: {
       width: '100%',
       maxHeight: '17vh',
-    },
-    car: {
-      width: theme.spacing(22.5),
-      height: theme.spacing(15),
-    },
-    carWrapper: {
-      display: 'flex',
-      justifyContent: 'center',
     },
     iconWrapper: {
       display: 'flex',
@@ -57,30 +50,20 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingRight: theme.spacing(4),
     },
     button: {
-      marginTop: theme.spacing(4),
+      marginTop: theme.spacing(2),
     },
   }),
 );
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const classes = useStyles();
-  const [queue, setQueue] = React.useState(false);
-
-  React.useEffect(() => {
-    const googleId = localStorage.getItem('googleId');
-    if (googleId) {
-      setQueue(true);
-    }
-  }, []);
-
   const onSuccessGoogle = async (
     response: GoogleLoginResponse | GoogleLoginResponseOffline | any,
   ) => {
     const { profileObj } = response;
-    postRegisterUser(profileObj);
-    console.log(profileObj);
-    localStorage.setItem('googleId', profileObj.googleId);
-    setQueue(true);
+    const { data } = await postAuth(profileObj);
+    localStorage.setItem('token', data.token);
+    history.push('/vouchers');
   };
 
   function onFailureGoogle(response: GoogleLoginResponse) {
@@ -94,31 +77,33 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
         src="https://i.imgur.com/UJRuonc.png"
         alt="Header"
       />
+      <h1 className={classes.title}>
+        <span className={classes.monte}>Vida</span>
+        <span className={classes.poppins}>re</span>
+      </h1>
       <div className={classes.root}>
         <p className={classes.text}>
-          Se inscreva na nossa <strong>lista de espera</strong>.
+          Nosso propósito é impactar a sociedade salvando vidas.
         </p>
         <div className={classes.iconWrapper}>
           <Heart className={classes.icon} />
         </div>
         <p className={classes.text}>
-          Entrando com sua conta do Google você fará parte da comunidade{' '}
-          <strong>Vidare</strong>, tendo acesso a um clube exclusivo de
-          vantagens, descontos e oportunidades únicas.
+          Além de salvar vidas doando sangue, plaquetas, medula óssea, plasma e
+          leite materno, você agora pode participar de nosso clube exclusivo de
+          descontos e vantagens para doadores.
         </p>
-        <div className={classes.carWrapper}>
-          <img
-            className={classes.car}
-            src="https://i.imgur.com/tWpO9R0.png"
-            alt="Car"
-          />
+        <div className={classes.iconWrapper}>
+          <Charity className={classes.icon} />
         </div>
+        <p className={classes.text}>
+          Sua <strong>doação</strong> pode fazer diferença.
+        </p>
         <GoogleLogin
           clientId="1067529242631-akp71a0lp6617a34042jiso66nnhvudk.apps.googleusercontent.com"
           buttonText="Entrar com o Google"
           onSuccess={onSuccessGoogle}
           onFailure={onFailureGoogle}
-          disabled={queue}
           cookiePolicy={'single_host_origin'}
           render={(renderProps: any) => (
             <Button
@@ -129,7 +114,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
               color="primary"
               fullWidth
             >
-              {queue ? 'você está na fila de espera' : 'ENTRAR COM O GOOGLE'}
+              ENTRAR COM O GOOGLE
             </Button>
           )}
         />
