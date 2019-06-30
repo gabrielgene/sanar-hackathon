@@ -9,6 +9,7 @@ import Webcam from 'react-webcam';
 import { Button } from '@material-ui/core';
 import { postBloodDonation } from '../../fetches';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import CheckBoxOutlined from '@material-ui/icons/CheckCircleOutline';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +82,7 @@ const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
               <>
                 <div>
                   <Typography variant="body1" gutterBottom>
-                    Comprovante Obrigado por colaborar com a manutenção da vida
+                    Obrigado por colaborar com a manutenção da vida
                     de dezenas de pessoas! Ao enviar seu comprovante você ganha
                     50 pontos!
                   </Typography>
@@ -110,7 +111,7 @@ const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
             picture: (
               <>
                 <Typography variant="body1" gutterBottom>
-                  Comprovante Obrigado por colaborar com a manutenção da vida de
+                  Obrigado por colaborar com a manutenção da vida de
                   dezenas de pessoas! Ao enviar seu comprovante você ganha 50
                   pontos!
                 </Typography>
@@ -128,7 +129,14 @@ const BloodDonation: React.FC<RouteComponentProps> = ({ match, history }) => {
             ),
             success: (
               <div>
-                <Typography variant="body1" gutterBottom>
+                <CheckBoxOutlined style={{
+                  fontSize: "200px",
+                  color: "#189218",
+                  textAlign: "center",
+                  width: "100%",
+                  marginTop: "30px"
+                }} />
+                <Typography variant="h4" style={{ textAlign: "center"}} gutterBottom>
                   Comprovante enviado!
                 </Typography>
                 <Button
